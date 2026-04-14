@@ -1,84 +1,65 @@
-# 🎮 Proyecto Gamepedia - Frontend II
+# 🎮 Gamepedia - Frontend II (Semana 6)
 
-Bienvenido a la construcción de tu primera Single Page Application (SPA) conectada a una base de datos real de videojuegos, utilizando React, React Router y la API de RAWG.
+Este repositorio contiene la actividad práctica de la Semana 6 para la asignatura de Desarrollo Frontend II. El proyecto consiste en una plataforma de catálogo de videojuegos que implementa patrones avanzados de manejo de estado y automatización de procesos.
 
-## 🚀 Paso 1: Instalación desde Cero
+## 🚀 Características del Proyecto
 
-Abre tu terminal y ejecuta los siguientes comandos para inicializar el proyecto base con Vite:
+* **Gestión de Estado Global:** Implementación de la API de Contexto de React para el manejo de la lista de Favoritos.
+* **Navegación Dinámica:** Uso de `react-router-dom` para la gestión de rutas, incluyendo vistas de detalles de juegos basadas en parámetros de URL.
+* **Consumo de API:** Integración directa con RAWG API para la obtención de datos de videojuegos en tiempo real.
 
-```bash
-# 1. Crear el proyecto (escribe 'y' si te pide confirmación)
-npm create vite@latest gamepedia -- --template react
+## 🛠️ Tecnologías y Herramientas
 
-# 2. Entrar a la carpeta recién creada
-cd gamepedia
+* **Framework:** [React](https://reactjs.org/) + [Vite](https://vitejs.dev/)
+* **Routing:** React Router DOM v6
+* **Estilos:** CSS3 (Grid & Flexbox)
+* **Contenedores:** Docker (Nginx para producción)
+* **CI/CD:** GitHub Actions (Linter, Tests y Semantic Release)
 
-# 3. Instalar las dependencias de Node.js
-npm install
+## 💻 Instalación y Ejecución Local
 
-# 4. Instalar React Router para la navegación entre páginas
-npm install react-router-dom
-```
+Para poner en marcha el proyecto en tu entorno de desarrollo, sigue estos pasos:
 
-## 🔑 Paso 2: Tu Credencial de Desarrollador (API Key)
+1.  **Clonar el repositorio:**
+    ```bash
+    git clone [https://github.com/JosephRangel/frontend2-week6-activity.git](https://github.com/JosephRangel/frontend2-week6-activity.git)
+    cd frontend2-week6-activity
+    ```
 
-Para poder descargar la información de los videojuegos, necesitas una llave de acceso:
-1. Entra a [rawg.io](https://rawg.io/) y crea una cuenta gratuita.
-2. Ve a tu perfil en la esquina superior derecha y selecciona **"Get an API key"**.
-3. Copia el código que te generen y guárdalo en un lugar seguro. Lo usaremos en el Paso 5.
+2.  **Instalar las dependencias:**
+    ```bash
+    npm install
+    ```
 
-## 🧹 Paso 3: Limpieza del Proyecto
+3.  **Iniciar el servidor de desarrollo:**
+    ```bash
+    npm run dev
+    ```
+    La aplicación se ejecutará por defecto en `http://localhost:5173`.
 
-Vite nos entrega código de ejemplo que no necesitamos. Vamos a limpiar:
-1. Elimina el archivo `src/App.css`.
-2. Abre `src/index.css`, borra todo el código que trae por defecto y pega el CSS de Gamepedia brindado en clase.
-3. Abre `src/App.jsx`, borra todo y déjalo temporalmente así:
+## 🐳 Ejecución con Docker
 
-```jsx
-function App() {
-  return <h1>Gamepedia en construcción</h1>
-}
-export default App;
-```
+El proyecto incluye un `Dockerfile` optimizado para producción. Para ejecutar la imagen sin necesidad de configurar el entorno de Node.js:
 
-## 📂 Paso 4: Estructura de Carpetas
+1.  **Construir la imagen:**
+    ```bash
+    docker build -t gamepedia-app .
+    ```
 
-Crea la siguiente arquitectura dentro de la carpeta `src/`:
+2.  **Correr el contenedor:**
+    ```bash
+    docker run -d -p 8080:80 --name gamepedia-container gamepedia-app
+    ```
+    Accede a la aplicación desde tu navegador en `http://localhost:8080`.
 
-```text
-src/
- ├── components/       
- │    ├── Navbar.jsx      
- │    └── GameCard.jsx 
- ├── pages/            
- │    ├── Home.jsx         
- │    ├── GameDetails.jsx  
- │    └── Favorites.jsx    
-```
+## ⚙️ Automatización (CI/CD)
 
-*(Asegúrate de que cada archivo tenga la estructura básica de un componente de React exportado por defecto `export default ComponentName`)*.
+Este repositorio cuenta con flujos de trabajo automatizados mediante **GitHub Actions**:
 
-## 🔗 Paso 5: Enrutamiento Principal
+* **Calidad de Código:** Validación automática de reglas de ESLint y ejecución de pruebas unitarias en cada Pull Request.
+* **Versionado Semántico:** Uso de bots para la generación automática de versiones (`tags`) y actualización del historial de cambios (`CHANGELOG.md`) tras cada integración exitosa en la rama principal.
 
-1. Abre `src/main.jsx`. Asegúrate de importar tus estilos (`import './index.css'`) y envuelve tu `<App />` con el `<BrowserRouter>`.
-2. Ve a `src/App.jsx`, importa tus páginas y configura las `<Routes>`:
-    * `/` -> `<Home />`
-    * `/game/:id` -> `<GameDetails />`
-    * `/favorites` -> `<Favorites />`
-
-## 🔌 Paso 6: Consumo de la API (RAWG)
-
-En tu archivo `src/pages/Home.jsx`:
-1. Crea los estados locales: `games`, `isLoading`, `error`.
-2. Configura un `useEffect` con dependencias vacías `[]`.
-3. Haz un `fetch` a `https://api.rawg.io/api/games?key=TU_API_KEY_AQUI`.
-4. Utiliza el método `.map()` en tu JSX para iterar sobre la variable `games` y renderizar múltiples componentes `<GameCard />`.
-
-## 🏃‍♂️ Paso 7: Ejecutar el Proyecto
-
-Para levantar el servidor de desarrollo y ver tu catálogo de juegos en vivo:
-
-```bash
-npm run dev
-```
-Abre `http://localhost:5173` en tu navegador para ver el resultado.
+---
+**Profesor:** Jose Antonio Rangel Reyes  
+**Institución:** Cesun Universidad  
+**Materia:** Desarrollo Frontend II
